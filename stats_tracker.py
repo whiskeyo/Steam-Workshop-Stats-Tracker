@@ -1,5 +1,5 @@
 import os
-import sys
+import platform
 import time
 import requests
 from bs4 import BeautifulSoup
@@ -8,7 +8,10 @@ from datetime import datetime
 URL = "https://steamcommunity.com/sharedfiles/filedetails/?id=314892291"
 
 def clear():
-    os.system('cls')
+    if platform.system() == 'Windows':
+        os.system('cls')
+    elif platform.system() == 'Linux':
+        os.system('clear')
 
 def get_data(URL):
     result = requests.get(URL)
