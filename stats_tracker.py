@@ -17,8 +17,13 @@ def get_data(URL):
     result = requests.get(URL)
     src = result.content
     soup = BeautifulSoup(src, 'html.parser')
+    table = soup.find("table", {"class": "stats_table"})
 
-    return soup.find("table", {"class": "stats_table"})
+    if table is not None:
+        return table
+    else:
+        time.sleep(1)
+        get_data(URL)
 
 def parse_table(table):
     data = []
@@ -100,8 +105,6 @@ def print_interval(seconds):
     try:
         while True:
             previous_data = current_data
-            current_data = parse_table(get_data(URL))
-
             differences = [
                 current_data[0][1] - previous_data[0][1], # visitors
                 current_data[1][1] - previous_data[1][1], # subs
