@@ -105,6 +105,8 @@ def print_interval(seconds):
     try:
         while True:
             previous_data = current_data
+            current_data = parse_table(get_data(URL))
+
             differences = [
                 current_data[0][1] - previous_data[0][1], # visitors
                 current_data[1][1] - previous_data[1][1], # subs
