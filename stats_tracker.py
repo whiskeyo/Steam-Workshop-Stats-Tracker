@@ -23,7 +23,7 @@ def get_data(URL):
         return table
     else:
         time.sleep(1)
-        get_data(URL)
+        return get_data(URL)
 
 def parse_table(table):
     data = []
